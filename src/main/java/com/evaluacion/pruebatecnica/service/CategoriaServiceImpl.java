@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaInterfaz<Categoria> {
@@ -21,4 +22,9 @@ public class CategoriaServiceImpl implements CategoriaInterfaz<Categoria> {
         return categoriaRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Categoria> getById(Integer id){
+        return categoriaRepository.findById(id);
+    }
 }

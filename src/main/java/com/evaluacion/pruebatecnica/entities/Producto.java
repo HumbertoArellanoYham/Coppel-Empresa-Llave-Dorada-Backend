@@ -11,10 +11,10 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProducto;
 
-    @Column(name = "des_Producto")
-    private String des_Producto;
+    @Column
+    private String des_producto;
 
-    @Column(name = "precio")
+    @Column
     private Double precio;
 
     @Column
@@ -39,11 +39,11 @@ public class Producto {
     }
 
     public String getDes_Producto() {
-        return des_Producto;
+        return des_producto;
     }
 
     public void setDes_Producto(String des_Producto) {
-        this.des_Producto = des_Producto;
+        this.des_producto = des_Producto;
     }
 
     public Double getPrecio() {
@@ -82,7 +82,7 @@ public class Producto {
     public String toString() {
         return "Producto{" +
                 "idProducto=" + idProducto +
-                ", des_Producto='" + des_Producto + '\'' +
+                ", des_Producto='" + des_producto + '\'' +
                 ", precio=" + precio +
                 ", existencia=" + existencia +
                 ", fecha_registro=" + fecha_registro +
