@@ -1,0 +1,21 @@
+{
+  "venta": {
+    "id_cliente": 1,
+    "total": 1500.00,
+    "fecha_venta": "2024-11-01"
+  },
+  "listItems": [
+    {
+      "id_producto": 1,
+      "cantidad_producto": 2,
+      "precio_unitario": 750.00,
+      "fecha_registro": "2024-11-01"
+    },
+    {
+      "id_producto": 3,
+      "cantidad_producto": 1,
+      "precio_unitario": 750.00,
+      "fecha_registro": "2024-11-01"
+    }
+  ]
+}
