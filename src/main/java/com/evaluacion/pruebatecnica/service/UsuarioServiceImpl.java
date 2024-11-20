@@ -5,6 +5,7 @@ import com.evaluacion.pruebatecnica.repositories.UsuarioRepository;
 import com.evaluacion.pruebatecnica.service.interfaces.UsuarioInterfaz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,5 +53,11 @@ public class UsuarioServiceImpl implements UsuarioInterfaz<Usuario> {
     @Override
     public Usuario updateUser(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Usuario> findByName(String name) {
+        return usuarioRepository.findByName(name);
     }
 }

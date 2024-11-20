@@ -36,4 +36,15 @@ public class TipoClienteController {
         return foundAllTipoCliente.isEmpty()? new ResponseEntity<>(HttpStatus.NO_CONTENT):
                 new ResponseEntity<>(foundAllTipoCliente, HttpStatus.OK);
     }
+
+    @GetMapping("/nameClientType/{id}")
+    public ResponseEntity<String> findClientByType(@PathVariable(name = "id") Integer id){
+        Optional<TipoCliente> getClient = tipoClienteService.getById(id);
+
+        if(getClient.isPresent()){
+            return new ResponseEntity<>(getClient.get().getDes_tipoCliente(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

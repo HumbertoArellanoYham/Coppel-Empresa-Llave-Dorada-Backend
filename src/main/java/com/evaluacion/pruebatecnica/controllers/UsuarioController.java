@@ -1,6 +1,8 @@
 package com.evaluacion.pruebatecnica.controllers;
 
+import com.evaluacion.pruebatecnica.entities.TipoUsuario;
 import com.evaluacion.pruebatecnica.entities.Usuario;
+import com.evaluacion.pruebatecnica.service.TipoUsuarioServiceImpl;
 import com.evaluacion.pruebatecnica.service.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioServiceImpl usuarioService;
 
+    @Autowired
+    private TipoUsuarioServiceImpl tipoUsuarioService;
+
     @GetMapping("findAll")
     public ResponseEntity<List<Usuario>> findAllUsers(){
         List<Usuario> userList = usuarioService.findAllUsuarios();
@@ -30,6 +35,21 @@ public class UsuarioController {
 
         return user.map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK)).
                 orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
+    }
+
+    @GetMapping("/findbyname/{name}/{clave}")
+    public ResponseEntity<Boolean> findUserByName(@PathVariable(name = "name") String name, @PathVariable("clave") String clave){
+        Optional<Usuario> isFound = usuarioService.findByName(name);
+
+        if(isFound.isPresent()){
+            Optional<TipoUsuario> isAdmin = tipoUsuarioService.getUserTypeById(isFound.get().getIdTipo_usuario());
+
+            if(isAdmin.isPresent() && isAdmin.get().getDes_tipo_usuario().equals("Administrador") && isFound.get().getClave().equals(clave)){
+                return new ResponseEntity<>(true, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/save")

@@ -17,4 +17,6 @@ public interface UsuarioInterfaz<T> {
     boolean existeUser(Integer id);
 
     T updateUser(T t);
+
+    Optional<T> findByName(String name);
 }

@@ -12,11 +12,12 @@ public class TipoUsuario {
     @Column
     private Integer idTipo_Usuario;
 
-    @Column
+    @Column(name = "des_tipo_usuario")
     private String des_tipo_usuario;
 
-    @Column
+    @Column(name = "fecha_registro")
     private LocalDate fecha_registro;
+
 
     public TipoUsuario(){}
 
